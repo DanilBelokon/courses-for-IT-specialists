@@ -2,11 +2,13 @@ import React, {JSX} from "react";
 import styles from "./Button.module.css";
 import {ButtonProps} from "./Button.props";
 import clsx from "clsx";
+import ArrowIcon from "@/public/arrow.svg";
 
 export const Button = ({
   appearance,
   children,
   className,
+  arrow = "none",
   ...props
 }: ButtonProps): JSX.Element => {
   return (
@@ -18,6 +20,14 @@ export const Button = ({
       {...props}
     >
       {children}
+      {arrow !== "none" && (
+        <ArrowIcon
+          className={clsx(styles.arrow, {
+            [styles.down]: arrow === "down",
+            [styles.right]: arrow === "right",
+          })}
+        />
+      )}
     </button>
   );
 };
