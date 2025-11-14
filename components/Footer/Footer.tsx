@@ -2,21 +2,18 @@ import React, {JSX} from "react";
 import styles from "./Footer.module.css";
 import {FooterProps} from "./Footer.props";
 import clsx from "clsx";
+import {format} from "date-fns";
 
-export const Footer = ({...props}: FooterProps): JSX.Element => {
+export const Footer = ({className, ...props}: FooterProps): JSX.Element => {
   return (
-    <div {...props}>
-      <div className={styles.wrapper}>
-        <p className={clsx(styles.info, styles.text)}>
-          OwlTop © 2020 - 2021 Все права защищены
-        </p>
-        <p className={clsx(styles.nda, styles.text)}>
-          Пользовательское соглашение
-        </p>
-        <p className={clsx(styles.conf, styles.text)}>
-          Политика конфиденциальности
-        </p>
-      </div>
-    </div>
+    <footer className={clsx(className, styles.footer)} {...props}>
+      <div>OwlTop © 2020 - {format(new Date(), "yyyy")} Все права защищены</div>
+      <a href="#" target="_blank">
+        Пользовательское соглашение
+      </a>
+      <a href="#" target="_blank">
+        Политика конфиденциальности
+      </a>
+    </footer>
   );
 };
