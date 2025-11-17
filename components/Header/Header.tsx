@@ -1,5 +1,5 @@
 import React, {JSX} from "react";
-import styles from "./Header.module.css";
+// import styles from "./Header.module.css";
 import {HeaderProps} from "./Header.props";
 
 export const Header = ({...props}: HeaderProps): JSX.Element => {

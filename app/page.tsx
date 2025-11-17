@@ -1,9 +1,10 @@
-"use client";
+// "use client";
 import {Button, Htag, P, Rating, Tag} from "@/components";
-import {useState} from "react";
+// import {useState} from "react";
+import Menu from "./components/Menu";
 
 export default function Home() {
-  const [rating, setRating] = useState<number>(4);
+  // const [rating, setRating] = useState<number>(4);
 
   return (
     <>
@@ -47,7 +48,8 @@ export default function Home() {
         Gray
       </Tag>
       <Tag color="primary">Primary</Tag>
-      <Rating rating={rating} isEditable setRating={setRating}></Rating>
+      <Rating rating={4}></Rating>
+      <Menu></Menu>
     </>
   );
 }
