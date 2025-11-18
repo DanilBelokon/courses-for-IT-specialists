@@ -1,7 +1,7 @@
 // "use client";
 import {Button, Htag, P, Rating, Tag} from "@/components";
 // import {useState} from "react";
-import Menu from "./components/Menu";
+import Menu from "./components/Menu/Menu";
 
 export default function Home() {
   // const [rating, setRating] = useState<number>(4);
