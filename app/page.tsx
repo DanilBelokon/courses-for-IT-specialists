@@ -49,7 +49,6 @@ export default function Home() {
       </Tag>
       <Tag color="primary">Primary</Tag>
       <Rating rating={4}></Rating>
-      <Menu></Menu>
     </>
   );
 }
