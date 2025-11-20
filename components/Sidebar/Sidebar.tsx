@@ -3,11 +3,14 @@ import styles from "./Sidebar.module.css";
 import {SidebarProps} from "./Sidebar.props";
 import Menu from "@/app/components/Menu/Menu";
 import Link from "next/link";
+import Logo from "../../public/logo.svg";
+import clsx from "clsx";
 
-export const Sidebar = ({...props}: SidebarProps): JSX.Element => {
+export const Sidebar = ({className, ...props}: SidebarProps): JSX.Element => {
   return (
-    <div {...props}>
-      <Link href={`/search`}>Поиск</Link>
+    <div className={clsx(className, styles.sidebar)} {...props}>
+      <Logo className={styles.logo}></Logo>
+      <div>Поиск</div>
       <Menu></Menu>
     </div>
   );

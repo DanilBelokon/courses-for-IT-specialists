@@ -1,8 +1,10 @@
+import {Card, HHData, Htag, Tag} from "@/components";
 import getMenu from "@/lib/api/menu";
 import getPage from "@/lib/api/page";
 import getProducts from "@/lib/api/product";
 import {Metadata} from "next";
 import {notFound} from "next/navigation";
+import styles from "./page.module.css";
 
 export const metadata: Metadata = {
   title: "Страница",
@@ -30,9 +32,24 @@ export default async function PageProducts({
     notFound();
   }
   return (
-    <div>
-      <div>{page.title}</div>
-      <div>{products.length}</div>
+    <div className={styles.wrapper}>
+      <div className={styles.title}>
+        <Htag tag="h1">{page.title}</Htag>
+        <Tag size="M" color="gray">
+          {products && products.length}
+        </Tag>
+        <span>Сортировка</span>
+      </div>
+      <div>
+        {products && products.map((p) => <div key={p.title}>{p.title}</div>)}
+      </div>
+      <div className={styles.hhTitle}>
+        <Htag tag="h2">Вакансии - {page.category}</Htag>
+        <Tag size="M" color="red">
+          hh.ru
+        </Tag>
+      </div>
+      {page.hh && <HHData {...page.hh}></HHData>}
     </div>
   );
 }
