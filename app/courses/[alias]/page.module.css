@@ -1,5 +1,4 @@
 .wrapper {
-  margin-top: 40px;
 }
 
 .title {
@@ -16,4 +15,38 @@
   align-items: baseline;
   justify-items: start;
   gap: 20px;
+}
+
+.seoText {
+  margin-top: 30px;
+  padding-left: 25px;
+}
+
+.tagSkill {
+  margin-right: 10px;
+}
+
+.seoText h1 {
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 35px;
+  margin: 0;
+}
+
+.seoText h2 {
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 35px;
+  margin: 0;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+.seoText h3 {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 27px;
+  margin: 0;
+  margin-top: 30px;
+  margin-bottom: 20px;
 }

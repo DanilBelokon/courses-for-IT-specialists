@@ -1,4 +1,4 @@
-import {Card, HHData, Htag, Tag} from "@/components";
+import {Advantages, HHData, Htag, P, Tag} from "@/components";
 import getMenu from "@/lib/api/menu";
 import getPage from "@/lib/api/page";
 import getProducts from "@/lib/api/product";
@@ -31,6 +31,7 @@ export default async function PageProducts({
   if (!page) {
     notFound();
   }
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.title}>
@@ -50,6 +51,28 @@ export default async function PageProducts({
         </Tag>
       </div>
       {page.hh && <HHData {...page.hh}></HHData>}
+      {page.advantages && page.advantages.length > 0 && (
+        <>
+          <Htag tag="h2">Преимущества</Htag>
+          <Advantages advantages={page.advantages}></Advantages>
+        </>
+      )}
+      {page.seoText && (
+        <div
+          className={styles.seoText}
+          dangerouslySetInnerHTML={{__html: page.seoText}}
+        ></div>
+      )}
+      {page.tags && (
+        <>
+          <Htag tag="h2">Получаемые навыки</Htag>
+          {page.tags.map((tag) => (
+            <Tag className={styles.tagSkill} key={tag} color="primary">
+              {tag}
+            </Tag>
+          ))}
+        </>
+      )}
     </div>
   );
 }
