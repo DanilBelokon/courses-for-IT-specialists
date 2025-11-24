@@ -1,8 +1,6 @@
 // "use client";
-import {Button, Htag, P, Rating, Tag} from "@/components";
+import {Button, Htag, Input, P, Rating, Tag, Textarea} from "@/components";
 // import {useState} from "react";
-import Menu from "./components/Menu/Menu";
-
 export default function Home() {
   // const [rating, setRating] = useState<number>(4);
 
@@ -49,6 +47,8 @@ export default function Home() {
       </Tag>
       <Tag color="primary">Primary</Tag>
       <Rating rating={4}></Rating>
+      <Input placeholder="test"></Input>
+      <Textarea placeholder="test"></Textarea>
     </>
   );
 }
