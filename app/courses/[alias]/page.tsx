@@ -1,10 +1,11 @@
-import {Advantages, HHData, Htag, P, Tag} from "@/components";
+import {Advantages, HHData, Htag, P, Sort, Tag} from "@/components";
 import getMenu from "@/lib/api/menu";
 import getPage from "@/lib/api/page";
 import getProducts from "@/lib/api/product";
 import {Metadata} from "next";
 import {notFound} from "next/navigation";
 import styles from "./page.module.css";
+import SortableProducts from "./SortableProducts";
 
 export const metadata: Metadata = {
   title: "Страница",
@@ -34,16 +35,12 @@ export default async function PageProducts({
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.title}>
-        <Htag tag="h1">{page.title}</Htag>
-        <Tag size="M" color="gray">
-          {products && products.length}
-        </Tag>
-        <span>Сортировка</span>
-      </div>
-      <div>
-        {products && products.map((p) => <div key={p.title}>{p.title}</div>)}
-      </div>
+      {products && products.length > 0 && (
+        <SortableProducts
+          products={products}
+          title={page.title}
+        ></SortableProducts>
+      )}
       <div className={styles.hhTitle}>
         <Htag tag="h2">Вакансии - {page.category}</Htag>
         <Tag size="M" color="red">
