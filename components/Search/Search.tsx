@@ -1,6 +1,6 @@
 "use client";
 
-import React, {JSX, useState, KeyboardEvent} from "react";
+import React, {JSX, useState} from "react";
 import {SearchProps} from "./Search.props";
 import styles from "./Search.module.css";
 import clsx from "clsx";

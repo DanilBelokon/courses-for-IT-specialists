@@ -20,11 +20,10 @@ export default function MenuClient({
   const [openedMenus, setOpenedMenus] = useState<string[]>([]);
 
   const openSecondLevel = (secondCategory: string) => {
-    setOpenedMenus(
-      (prev) =>
-        prev.includes(secondCategory)
-          ? prev.filter((item) => item !== secondCategory) // Удаляем
-          : [...prev, secondCategory] // Добавляем
+    setOpenedMenus((prev) =>
+      prev.includes(secondCategory)
+        ? prev.filter((item) => item !== secondCategory)
+        : [...prev, secondCategory]
     );
   };
   const buildFirstLevel = () => {

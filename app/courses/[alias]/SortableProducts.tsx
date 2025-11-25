@@ -1,6 +1,6 @@
 "use client";
 
-import {Htag, Sort, Tag} from "@/components";
+import {Htag, Product, Sort, Tag} from "@/components";
 import {ProductModel} from "@/interfaces/product.interface";
 import styles from "./page.module.css";
 import {SortEnum} from "@/components/Sort/Sort.props";
@@ -37,7 +37,9 @@ export default function SortableProducts({
       </div>
       <div>
         {sortedProducts &&
-          sortedProducts.map((p) => <div key={p.title}>{p.title}</div>)}
+          sortedProducts.map((p) => (
+            <Product product={p} key={p._id}></Product>
+          ))}
       </div>
     </>
   );
