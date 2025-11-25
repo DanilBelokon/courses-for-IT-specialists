@@ -16,6 +16,7 @@ export const Product = ({
   className,
   ...props
 }: ProductProps): JSX.Element => {
+  console.log(product);
   return (
     <Card className={styles.product}>
       <div className={styles.logo}>
@@ -74,7 +75,7 @@ export const Product = ({
           </div>
         )}
       </div>
-      <Divider className={styles.hr}></Divider>
+      <Divider className={clsx(styles.hr, styles.hr2)}></Divider>
       <div className={styles.actions}>
         <Button appearance="primary">Узнать подробнее</Button>
         <Button
