@@ -1,4 +1,4 @@
-import {Advantages, HHData, Htag, P, Sort, Tag} from "@/components";
+import {Advantages, HHData, Htag, Tag} from "@/components";
 import getMenu from "@/lib/api/menu";
 import getPage from "@/lib/api/page";
 import getProducts from "@/lib/api/product";
