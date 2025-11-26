@@ -4,7 +4,7 @@ import {Htag, Product, Sort, Tag} from "@/components";
 import {ProductModel} from "@/interfaces/product.interface";
 import styles from "./page.module.css";
 import {SortEnum} from "@/components/Sort/Sort.props";
-import {useReducer} from "react";
+import {useEffect, useReducer} from "react";
 import {sortReducer} from "@/components/Sort/sortReducer";
 
 export default function SortableProducts({
@@ -21,6 +21,10 @@ export default function SortableProducts({
       sort: SortEnum.Rating,
     }
   );
+
+  useEffect(() => {
+    setSort(SortEnum.Rating);
+  }, []);
 
   const setSort = (sort: SortEnum) => {
     dispatchSort({type: sort});
