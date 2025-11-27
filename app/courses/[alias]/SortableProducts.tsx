@@ -17,14 +17,12 @@ export default function SortableProducts({
   const [{products: sortedProducts, sort}, dispatchSort] = useReducer(
     sortReducer,
     {
-      products,
+      products: [...products].sort((a, b) =>
+        a.initialRating > b.initialRating ? -1 : 1
+      ),
       sort: SortEnum.Rating,
     }
   );
-
-  useEffect(() => {
-    setSort(SortEnum.Rating);
-  }, []);
 
   const setSort = (sort: SortEnum) => {
     dispatchSort({type: sort});
