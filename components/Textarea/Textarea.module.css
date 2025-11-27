@@ -12,8 +12,25 @@
   font-family: inherit;
   /* min-height: 76px;
   width: 100%; */
+  width: 100%;
 }
 
 .textarea::placeholder {
   color: #a4a4a4;
+}
+
+.textareaWrapper {
+  position: relative;
+}
+
+.error {
+  outline-color: var(--red);
+  border: 1px solid var(--red);
+}
+
+.errorMessage {
+  position: absolute;
+  left: 0;
+  bottom: -15px;
+  color: var(--red);
 }

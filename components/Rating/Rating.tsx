@@ -15,7 +15,7 @@ import StarIcon from "./star.svg";
 
 export const Rating = forwardRef(
   (
-    {isEditable = false, rating, setRating, ...props}: RatingProps,
+    {isEditable = false, rating, setRating, error, ...props}: RatingProps,
     ref: ForwardedRef<HTMLDivElement>
   ): JSX.Element => {
     const [ratingArray, setRatingArray] = useState<JSX.Element[]>(
@@ -24,7 +24,7 @@ export const Rating = forwardRef(
 
     useEffect(() => {
       constructRating(rating);
-    }, [rating]);
+    }, [rating, error]);
 
     const constructRating = (currentRating: number) => {
       const updatedArray = ratingArray.map((r: JSX.Element, i: number) => {
@@ -34,6 +34,7 @@ export const Rating = forwardRef(
             className={clsx(styles.star, {
               [styles.filled]: i < currentRating,
               [styles.editable]: isEditable,
+              [styles.error]: error,
             })}
             onMouseEnter={() => changeDispay(i + 1)}
             onMouseLeave={() => changeDispay(rating)}
@@ -71,8 +72,9 @@ export const Rating = forwardRef(
       setRating(i);
     };
     return (
-      <div ref={ref} {...props}>
+      <div className={styles.ratingWrapper} ref={ref} {...props}>
         {ratingArray}
+        {error && <span className={styles.errorMessage}>{error.message}</span>}
       </div>
     );
   }

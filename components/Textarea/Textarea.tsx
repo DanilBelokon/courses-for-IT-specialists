@@ -6,15 +6,20 @@ import {TextareaProps} from "./Textarea.props";
 
 export const Textarea = forwardRef(
   (
-    {className, ...props}: TextareaProps,
+    {className, error, ...props}: TextareaProps,
     ref: ForwardedRef<HTMLTextAreaElement>
   ): JSX.Element => {
     return (
-      <textarea
-        className={clsx(className, styles.textarea)}
-        {...props}
-        ref={ref}
-      ></textarea>
+      <div className={clsx(styles.textareaWrapper, className)}>
+        <textarea
+          className={clsx(styles.textarea, {
+            [styles.error]: error,
+          })}
+          {...props}
+          ref={ref}
+        ></textarea>
+        {error && <span className={styles.errorMessage}>{error.message}</span>}
+      </div>
     );
   }
 );

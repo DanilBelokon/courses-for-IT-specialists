@@ -15,7 +15,12 @@ export const ReviewForm = ({
   className,
   ...props
 }: ReviewFormProps): JSX.Element => {
-  const {register, control, handleSubmit} = useForm<IReviewForm>();
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState: {errors},
+  } = useForm<IReviewForm>();
 
   const onSubmit = (data: IReviewForm) => {
     console.log(data);
@@ -24,31 +29,45 @@ export const ReviewForm = ({
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={clsx(styles.reviewForm, className)} {...props}>
-        <Input {...register("name")} placeholder="Имя"></Input>
         <Input
-          {...register("title")}
+          {...register("name", {
+            required: "Заполните имя!",
+          })}
+          placeholder="Имя"
+          error={errors.name}
+        ></Input>
+        <Input
+          {...register("title", {
+            required: "Заполните заголовок!",
+          })}
           className={styles.title}
           placeholder="Заголовок отзыва"
+          error={errors.title}
         ></Input>
         <div className={styles.rating}>
           <span>Оценка:</span>
           <Controller
             control={control}
             name="rating"
+            rules={{required: "Поставьте оценку!"}}
             render={({field}) => (
               <Rating
                 isEditable
                 rating={field.value}
                 ref={field.ref}
                 setRating={field.onChange}
+                error={errors.rating}
               ></Rating>
             )}
           ></Controller>
         </div>
         <Textarea
-          {...register("description")}
+          {...register("description", {
+            required: "Заполните ваш отзыв",
+          })}
           className={styles.description}
           placeholder="Текст отзыва"
+          error={errors.description}
         ></Textarea>
         <div className={styles.submit}>
           <Button appearance="primary">Отправить</Button>

@@ -5,15 +5,20 @@ import clsx from "clsx";
 
 export const Input = forwardRef(
   (
-    {className, ...props}: InputProps,
+    {className, error, ...props}: InputProps,
     ref: ForwardedRef<HTMLInputElement>
   ): JSX.Element => {
     return (
-      <input
-        className={clsx(className, styles.input)}
-        ref={ref}
-        {...props}
-      ></input>
+      <div className={clsx(styles.inputWrapper, className)}>
+        <input
+          className={clsx(styles.input, {
+            [styles.error]: error,
+          })}
+          ref={ref}
+          {...props}
+        ></input>
+        {error && <span className={styles.errorMessage}>{error.message}</span>}
+      </div>
     );
   }
 );
