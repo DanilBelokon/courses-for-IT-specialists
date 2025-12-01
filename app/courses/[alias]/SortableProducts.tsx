@@ -4,7 +4,7 @@ import {Htag, Product, Sort, Tag} from "@/components";
 import {ProductModel} from "@/interfaces/product.interface";
 import styles from "./page.module.css";
 import {SortEnum} from "@/components/Sort/Sort.props";
-import {useEffect, useReducer} from "react";
+import {useReducer} from "react";
 import {sortReducer} from "@/components/Sort/sortReducer";
 
 export default function SortableProducts({
@@ -40,7 +40,7 @@ export default function SortableProducts({
       <div>
         {sortedProducts &&
           sortedProducts.map((p) => (
-            <Product product={p} key={p._id}></Product>
+            <Product layout product={p} key={p._id}></Product>
           ))}
       </div>
     </>

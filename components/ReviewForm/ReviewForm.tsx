@@ -42,7 +42,7 @@ export const ReviewForm = ({
       } else {
         setError(true);
       }
-    } catch (e) {
+    } catch {
       setError(true);
     }
   };

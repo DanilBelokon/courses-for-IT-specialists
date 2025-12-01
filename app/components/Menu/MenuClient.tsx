@@ -8,6 +8,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
 import firstLevelMenu from "@/helpers/helpers";
+import {motion} from "framer-motion";
 
 export default function MenuClient({
   firstCategory,
@@ -18,6 +19,25 @@ export default function MenuClient({
 }): JSX.Element {
   const pathname = usePathname();
   const [openedMenus, setOpenedMenus] = useState<string[]>([]);
+
+  const variants = {
+    visible: {
+      marginBottom: 20,
+      transition: {
+        when: "beforeChildren",
+        staggerChildren: 0.1,
+      },
+    },
+    hidden: {marginBottom: 0},
+  };
+
+  const variantsChildren = {
+    visible: {
+      opacity: 1,
+      height: 29,
+    },
+    hidden: {opacity: 0, height: 0},
+  };
 
   const openSecondLevel = (secondCategory: string) => {
     setOpenedMenus((prev) =>
@@ -47,6 +67,7 @@ export default function MenuClient({
       </>
     );
   };
+
   const buildSecondLevel = (route: string) => {
     return (
       <div className={styles.secondBlock}>
@@ -66,30 +87,34 @@ export default function MenuClient({
               >
                 {m._id.secondCategory}
               </div>
-              <div
-                className={clsx(styles.secondLevelBlock, {
-                  [styles.secondLevelBlockOpened]: m.isOpenen,
-                })}
+              <motion.div
+                layout
+                variants={variants}
+                initial={m.isOpenen ? "visible" : "hidden"}
+                animate={m.isOpenen ? "visible" : "hidden"}
+                className={clsx(styles.secondLevelBlock)}
               >
                 {buildThirdLevel(m.pages, route)}
-              </div>
+              </motion.div>
             </div>
           );
         })}
       </div>
     );
   };
+
   const buildThirdLevel = (pages: PageItem[], route: string) => {
     return pages.map((p) => (
-      <Link
-        key={p.alias}
-        href={`/${route}/${p.alias}`}
-        className={clsx(styles.thirdLevel, {
-          [styles.thirdLevelActive]: `/${route}/${p.alias}` === pathname,
-        })}
-      >
-        {p.category}
-      </Link>
+      <motion.div key={p.alias} variants={variantsChildren}>
+        <Link
+          href={`/${route}/${p.alias}`}
+          className={clsx(styles.thirdLevel, {
+            [styles.thirdLevelActive]: `/${route}/${p.alias}` === pathname,
+          })}
+        >
+          {p.category}
+        </Link>
+      </motion.div>
     ));
   };
 
