@@ -7,6 +7,7 @@ import UpIcon from "./up.svg";
 import {useScrollY} from "@/hooks/useScrollY";
 import {useAnimation} from "framer-motion";
 import {motion} from "framer-motion";
+import {ButtonIcon} from "../ButtonIcon/ButtonIcon";
 
 export const Up = (): JSX.Element => {
   const controls = useAnimation();
@@ -24,13 +25,12 @@ export const Up = (): JSX.Element => {
     });
   };
   return (
-    <motion.button
-      onClick={scrollToTop}
-      className={styles.up}
-      animate={controls}
-      initial={{opacity: 0}}
-    >
-      <UpIcon></UpIcon>
-    </motion.button>
+    <motion.div className={styles.up} animate={controls} initial={{opacity: 0}}>
+      <ButtonIcon
+        onClick={scrollToTop}
+        appearance="primary"
+        icon="up"
+      ></ButtonIcon>
+    </motion.div>
   );
 };
