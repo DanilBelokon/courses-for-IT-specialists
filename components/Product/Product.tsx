@@ -13,7 +13,7 @@ import {declOfNum, priceRu} from "@/helpers/helpers";
 import {Divider} from "../Divider/Divider";
 import {Review} from "../Review/Review";
 import {ReviewForm} from "../ReviewForm/ReviewForm";
-import {motion} from "framer-motion";
+import {motion, AnimatePresence} from "framer-motion";
 
 export const Product = motion.create(
   ({product, className, ...props}: ProductProps): JSX.Element => {
@@ -23,6 +23,19 @@ export const Product = motion.create(
     const scrollToReview = () => {
       setIsReviewOpened(true);
       reviewRef.current?.scrollIntoView({behavior: "smooth", block: "start"});
+    };
+
+    const variants = {
+      visible: {
+        opacity: 1,
+        height: "auto",
+        pointerEvents: "auto",
+      },
+      hidden: {
+        opacity: 0,
+        height: 0,
+        pointerEvents: "none",
+      },
     };
 
     return (
@@ -101,22 +114,26 @@ export const Product = motion.create(
             </Button>
           </div>
         </Card>
-        <Card
-          className={clsx(styles.reviews, {
-            [styles.opened]: isReviewOpened,
-            [styles.closed]: !isReviewOpened,
-          })}
-          color="blue"
-          ref={reviewRef}
-        >
-          {product.reviews.map((r) => (
-            <React.Fragment key={r._id}>
-              <Review key={r._id} review={r}></Review>
-              <Divider></Divider>
-            </React.Fragment>
-          ))}
-          <ReviewForm productId={product._id}></ReviewForm>
-        </Card>
+        <AnimatePresence>
+          {isReviewOpened && (
+            <motion.div
+              variants={variants}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+            >
+              <Card className={styles.reviews} color="blue" ref={reviewRef}>
+                {product.reviews.map((r) => (
+                  <React.Fragment key={r._id}>
+                    <Review key={r._id} review={r}></Review>
+                    <Divider></Divider>
+                  </React.Fragment>
+                ))}
+                <ReviewForm productId={product._id}></ReviewForm>
+              </Card>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     );
   }
