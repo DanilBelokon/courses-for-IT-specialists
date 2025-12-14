@@ -3,6 +3,7 @@ import {Noto_Sans} from "next/font/google";
 import "./globals.css";
 import styles from "./layout.module.css";
 import {Footer, Header, Sidebar, Up} from "@/components";
+import {SkipLink} from "./components/SkipLink/SkipLink";
 
 const notoSans = Noto_Sans({
   weight: ["300", "400", "500", "700"],
@@ -24,9 +25,12 @@ export default function RootLayout({
     <html lang="ru" className={notoSans.className}>
       <body>
         <div className={styles.wrapper}>
+          <SkipLink></SkipLink>
           <Header className={styles.header} />
           <Sidebar className={styles.sidebar}></Sidebar>
-          <div className={styles.body}>{children}</div>
+          <div id="main-content" className={styles.body}>
+            {children}
+          </div>
           <Footer className={styles.footer} />
           <Up></Up>
         </div>

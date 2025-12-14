@@ -47,7 +47,7 @@ export const Header = ({className, ...props}: HeaderProps): JSX.Element => {
         <ButtonIcon
           className={styles.menuClose}
           appearance="white"
-          icon="menu"
+          icon="close"
           onClick={() => setIsOpened(false)}
         ></ButtonIcon>
       </motion.div>

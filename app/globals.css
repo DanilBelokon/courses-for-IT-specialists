@@ -19,13 +19,13 @@ a {
 :root {
   --black: #3b434e;
   --white: white;
-  --primary: #7653fc;
+  --primary: #5b40c2;
   --primary-hover: #4c2dcb;
   --red: #fc836d;
   --red-light: #e19689;
-  --green: #1dc37e;
+  --green: #007c48;
   --green-light: #c8f8e4;
   --gray-light: #ebebeb;
-  --gray-dark: #787d85;
+  --gray-dark: #505459;
   --gray: #a4a4a4;
 }

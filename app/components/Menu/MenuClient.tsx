@@ -1,7 +1,7 @@
 "use client";
 
 import {MenuItem, PageItem} from "@/interfaces/menu.interface";
-import {useState} from "react";
+import {KeyboardEvent, useState} from "react";
 import {JSX} from "react";
 import styles from "./Menu.module.css";
 import clsx from "clsx";
@@ -34,7 +34,7 @@ export default function MenuClient({
   const variantsChildren = {
     visible: {
       opacity: 1,
-      height: 29,
+      height: "auto",
     },
     hidden: {opacity: 0, height: 0},
   };
@@ -46,6 +46,19 @@ export default function MenuClient({
         : [...prev, secondCategory]
     );
   };
+
+  const openSecondLevelKey = (key: KeyboardEvent, secondCategory: string) => {
+    if (key.code === "Space" || key.code === "Enter") {
+      key.preventDefault();
+
+      setOpenedMenus((prev) =>
+        prev.includes(secondCategory)
+          ? prev.filter((item) => item !== secondCategory)
+          : [...prev, secondCategory]
+      );
+    }
+  };
+
   const buildFirstLevel = () => {
     return (
       <>
@@ -82,6 +95,10 @@ export default function MenuClient({
           return (
             <div key={m._id.secondCategory}>
               <div
+                tabIndex={0}
+                onKeyDown={(key: KeyboardEvent) =>
+                  openSecondLevelKey(key, m._id.secondCategory)
+                }
                 className={styles.secondLevel}
                 onClick={() => openSecondLevel(m._id.secondCategory)}
               >
@@ -94,7 +111,7 @@ export default function MenuClient({
                 animate={m.isOpenen ? "visible" : "hidden"}
                 className={clsx(styles.secondLevelBlock)}
               >
-                {buildThirdLevel(m.pages, route)}
+                {buildThirdLevel(m.pages, route, m.isOpenen)}
               </motion.div>
             </div>
           );
@@ -103,10 +120,19 @@ export default function MenuClient({
     );
   };
 
-  const buildThirdLevel = (pages: PageItem[], route: string) => {
+  const buildThirdLevel = (
+    pages: PageItem[],
+    route: string,
+    isOpened: boolean
+  ) => {
     return pages.map((p) => (
-      <motion.div key={p.alias} variants={variantsChildren}>
+      <motion.div
+        key={p.alias}
+        variants={variantsChildren}
+        style={{overflow: "hidden"}}
+      >
         <Link
+          tabIndex={isOpened ? 0 : -1}
           href={`/${route}/${p.alias}`}
           className={clsx(styles.thirdLevel, {
             [styles.thirdLevelActive]: `/${route}/${p.alias}` === pathname,
